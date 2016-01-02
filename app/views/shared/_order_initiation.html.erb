@@ -1,0 +1,11 @@
+<%= form_for :order, url: new_order_path, method: 'get', class: 'form-inline' do |f| %>
+    <div class="col-sm-12">
+      <%= f.label :url, "<h3>Type your Product long URL here:</h3>".html_safe %>
+    </div>
+    <div class="col-sm-8">
+      <%= f.text_field :url, class: 'form-control' %>
+    </div>
+    <div class="col-sm-4">
+      <%= f.submit 'Submit', class: 'btn btn-common' %>
+    </div>
+<% end %>

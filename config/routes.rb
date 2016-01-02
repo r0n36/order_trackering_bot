@@ -5,4 +5,7 @@ Rails.application.routes.draw do
   post '/' => 'home#shorten'
   root to: 'home#index'
   get '/:id' => 'shortener/shortened_urls#show'
+
+  resources :orders
+  resources :products
 end
