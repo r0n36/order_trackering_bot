@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="col-md-12 col-sm-12" id="main-form">
+    <%= form_for :shorten, url: '/', method: 'post', remote: true, class: 'form-inline' do |f| %>
+      <div class="col-sm-12">
+        <%= f.label :url, "<h3>Type your long URL here:</h3>".html_safe %>
+      </div>
+      <div class="col-sm-8">
+        <%= f.text_field :url, class: 'form-control' %>
+      </div>
+      <div class="col-sm-4">
+        <%= f.submit 'Shorten', class: 'btn btn-common' %>
+      </div>
+    <% end %>
+  </div>
+</div>

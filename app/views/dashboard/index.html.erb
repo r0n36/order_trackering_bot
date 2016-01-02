@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="col-md-12 col-sm-12">
+    <table class="table">
+      <th>Long URL</th>
+      <th>Created</th>
+      <th>Short URL</th>
+      <th>Clicks</th>
+      <th></th>
+      <% @urls.each do |url| %>
+        <tr id="url-<%= url.id %>">
+          <td><%= url.url %></td>
+          <td><%= url.created_at.strftime('%b %d, %Y %H:%M:S %p') %></td>
+          <td><%= link_to "#{root_url}#{url.unique_key}", "#{root_url}#{url.unique_key}" %></td>
+          <td><%= url.use_count %></td>
+          <!--Only because of this 'x' icon, otherwise I would use `button_to` and `post` method-->
+          <td><%= link_to '<span><i class="fa fa-times"></i></span>'.html_safe, "/#{url.id}/delete", remote: true %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

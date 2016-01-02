@@ -1,0 +1,25 @@
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h2 class="modal-title" id="myModalLabel">Success!</h2>
+      </div>
+      <div class="modal-body">
+        Here is your shortened url:
+        <figure class="highlight">
+          <pre>
+            <%= link_to "#{url}", url %>
+          </pre>
+        </figure>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $('#myModal').on('hidden.bs.modal', function () {
+    location.reload();
+  })
+</script>

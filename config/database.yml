@@ -1,0 +1,20 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: url_shortener_development
+  pool: 5
+  template: template0
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: url_shortener_test
+  pool: 5
+  template: template0
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: url_shortener_production
+  pool: 5
+  template: template0
