@@ -6292,3 +6292,557 @@ Processing by OrdersController#new as HTML
   [1m[35m (0.2ms)[0m  BEGIN
   [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "shortened_urls" ("owner_id", "owner_type", "url", "unique_key", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["owner_id", 2], ["owner_type", "User"], ["url", "http://www.flipkart.com/apple-iphone-5s/p/itme8ra4f4twtsva?pid=MOBDPPZZPXVDJHSQ"], ["unique_key", "5b1npb"], ["created_at", "2016-01-02 08:12:20.577344"], ["updated_at", "2016-01-02 08:12:20.577344"]]
   [1m[35m (0.9ms)[0m  COMMIT
+
+
+Started GET "/" for 127.0.0.1 at 2016-01-02 14:20:30 +0600
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by HomeController#index as HTML
+Nothing to Do here!
+  [1m[35mUser Load (8.0ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+  Rendered shared/_order_initiation.html.erb (8.0ms)
+  Rendered home/index.html.erb within layouts/application (270.0ms)
+Completed 200 OK in 3692ms (Views: 3463.7ms | ActiveRecord: 29.6ms)
+
+
+Started GET "/dashboard" for 127.0.0.1 at 2016-01-02 14:20:47 +0600
+Processing by DashboardController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+  [1m[35mShortener::ShortenedUrl Load (0.7ms)[0m  SELECT "shortened_urls".* FROM "shortened_urls" WHERE "shortened_urls"."deleted_at" IS NULL AND "shortened_urls"."owner_id" = $1 AND "shortened_urls"."owner_type" = $2  [["owner_id", 2], ["owner_type", "User"]]
+  Rendered dashboard/index.html.erb within layouts/application (172.5ms)
+Completed 200 OK in 896ms (Views: 830.0ms | ActiveRecord: 3.1ms)
+
+
+Started GET "/57/delete" for 127.0.0.1 at 2016-01-02 14:20:50 +0600
+Processing by DashboardController#destroy_shortened as JS
+  Parameters: {"url_id"=>"57"}
+  [1m[36mUser Load (6.8ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+  [1m[35mShortener::ShortenedUrl Load (1.5ms)[0m  SELECT  "shortened_urls".* FROM "shortened_urls" WHERE "shortened_urls"."deleted_at" IS NULL AND "shortened_urls"."id" = $1 LIMIT 1  [["id", 57]]
+  [1m[36m (7.8ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.9ms)[0m  UPDATE "shortened_urls" SET "deleted_at" = '2016-01-02 08:20:50.839940' WHERE "shortened_urls"."id" = $1  [["id", 57]]
+  [1m[36m (2.0ms)[0m  [1mCOMMIT[0m
+  Rendered dashboard/destroy_shortened.js.erb (1.0ms)
+Completed 200 OK in 115ms (Views: 47.6ms | ActiveRecord: 18.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-01-02 14:20:53 +0600
+Processing by HomeController#index as HTML
+Nothing to Do here!
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+  Rendered shared/_order_initiation.html.erb (4.4ms)
+  Rendered home/index.html.erb within layouts/application (20.3ms)
+Completed 200 OK in 582ms (Views: 579.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/orders/new?utf8=%E2%9C%93&order%5Burl%5D=http%3A%2F%2Fwww.flipkart.com%2Fapple-iphone-5s%2Fp%2Fitme8ra4f4twtsva%3Fpid%3DMOBDPPZZPXVDJHSQ&commit=Submit" for 127.0.0.1 at 2016-01-02 14:20:58 +0600
+Processing by OrdersController#new as HTML
+  Parameters: {"utf8"=>"✓", "order"=>{"url"=>"http://www.flipkart.com/apple-iphone-5s/p/itme8ra4f4twtsva?pid=MOBDPPZZPXVDJHSQ"}, "commit"=>"Submit"}
+  [1m[36mUser Load (6.8ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+  [1m[35mShortener::ShortenedUrl Load (0.8ms)[0m  SELECT  "shortened_urls".* FROM "shortened_urls" WHERE "shortened_urls"."deleted_at" IS NULL AND "shortened_urls"."owner_id" = $1 AND "shortened_urls"."owner_type" = $2 AND "shortened_urls"."url" = $3  ORDER BY "shortened_urls"."id" ASC LIMIT 1  [["owner_id", 2], ["owner_type", "User"], ["url", "http://www.flipkart.com/apple-iphone-5s/p/itme8ra4f4twtsva?pid=MOBDPPZZPXVDJHSQ"]]
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "shortened_urls" ("owner_id", "owner_type", "url", "unique_key", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["owner_id", 2], ["owner_type", "User"], ["url", "http://www.flipkart.com/apple-iphone-5s/p/itme8ra4f4twtsva?pid=MOBDPPZZPXVDJHSQ"], ["unique_key", "2acmsf"], ["created_at", "2016-01-02 08:20:59.396574"], ["updated_at", "2016-01-02 08:20:59.396574"]]
+  [1m[36m (0.9ms)[0m  [1mCOMMIT[0m
+
+
+Started GET "/" for 127.0.0.1 at 2016-01-02 16:45:37 +0600
+  [1m[36mActiveRecord::SchemaMigration Load (21.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by HomeController#index as HTML
+Nothing to Do here!
+  Rendered home/index.html.erb within layouts/application (20.5ms)
+Completed 200 OK in 1958ms (Views: 1924.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2016-01-02 16:45:43 +0600
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/shared/_links.html.erb (40.2ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (237.9ms)
+Completed 200 OK in 488ms (Views: 367.8ms | ActiveRecord: 86.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2016-01-02 16:45:53 +0600
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"uAlZNtwDfFAK9UFWy1lnxlshtHYRLhkz9INIJD0cLpvzNOYt2dTq7IASMtRKWcW23xOq2dxEbzaMo9jSVNOEVw==", "user"=>{"email"=>"rony.cse36@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[35mUser Load (36.7ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."email" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["email", "rony.cse36@gmail.com"]]
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  UPDATE "users" SET "last_sign_in_at" = $1, "current_sign_in_at" = $2, "sign_in_count" = $3, "updated_at" = $4 WHERE "users"."id" = $5  [["last_sign_in_at", "2016-01-02 08:09:12.046962"], ["current_sign_in_at", "2016-01-02 10:45:54.372601"], ["sign_in_count", 4], ["updated_at", "2016-01-02 10:45:54.375902"], ["id", 2]]
+  [1m[36m (51.4ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 880ms (ActiveRecord: 90.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-01-02 16:45:54 +0600
+Processing by HomeController#index as HTML
+Nothing to Do here!
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+  Rendered shared/_order_initiation.html.erb (3.1ms)
+  Rendered home/index.html.erb within layouts/application (28.7ms)
+Completed 200 OK in 586ms (Views: 585.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/dashboard" for 127.0.0.1 at 2016-01-02 16:45:58 +0600
+Processing by DashboardController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+  [1m[35mShortener::ShortenedUrl Load (62.2ms)[0m  SELECT "shortened_urls".* FROM "shortened_urls" WHERE "shortened_urls"."deleted_at" IS NULL AND "shortened_urls"."owner_id" = $1 AND "shortened_urls"."owner_type" = $2  [["owner_id", 2], ["owner_type", "User"]]
+  Rendered dashboard/index.html.erb within layouts/application (97.6ms)
+Completed 200 OK in 465ms (Views: 343.0ms | ActiveRecord: 71.2ms)
+
+
+Started GET "/58/delete" for 127.0.0.1 at 2016-01-02 16:46:09 +0600
+Processing by DashboardController#destroy_shortened as JS
+  Parameters: {"url_id"=>"58"}
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+  [1m[35mShortener::ShortenedUrl Load (0.4ms)[0m  SELECT  "shortened_urls".* FROM "shortened_urls" WHERE "shortened_urls"."deleted_at" IS NULL AND "shortened_urls"."id" = $1 LIMIT 1  [["id", 58]]
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  UPDATE "shortened_urls" SET "deleted_at" = '2016-01-02 10:46:09.240826' WHERE "shortened_urls"."id" = $1  [["id", 58]]
+  [1m[36m (0.7ms)[0m  [1mCOMMIT[0m
+  Rendered dashboard/destroy_shortened.js.erb (1.5ms)
+Completed 200 OK in 53ms (Views: 45.2ms | ActiveRecord: 2.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-01-02 16:46:14 +0600
+Processing by HomeController#index as HTML
+Nothing to Do here!
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+  Rendered shared/_order_initiation.html.erb (2.4ms)
+  Rendered home/index.html.erb within layouts/application (5.5ms)
+Completed 200 OK in 74ms (Views: 72.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/orders/new?utf8=%E2%9C%93&order%5Burl%5D=http%3A%2F%2Fwww.flipkart.com%2Fapple-iphone-5s%2Fp%2Fitme8ra4f4twtsva%3Fpid%3DMOBDPPZZPXVDJHSQ&commit=Submit" for 127.0.0.1 at 2016-01-02 16:46:19 +0600
+Processing by OrdersController#new as HTML
+  Parameters: {"utf8"=>"✓", "order"=>{"url"=>"http://www.flipkart.com/apple-iphone-5s/p/itme8ra4f4twtsva?pid=MOBDPPZZPXVDJHSQ"}, "commit"=>"Submit"}
+  [1m[36mUser Load (6.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+  [1m[35mShortener::ShortenedUrl Load (0.5ms)[0m  SELECT  "shortened_urls".* FROM "shortened_urls" WHERE "shortened_urls"."deleted_at" IS NULL AND "shortened_urls"."owner_id" = $1 AND "shortened_urls"."owner_type" = $2 AND "shortened_urls"."url" = $3  ORDER BY "shortened_urls"."id" ASC LIMIT 1  [["owner_id", 2], ["owner_type", "User"], ["url", "http://www.flipkart.com/apple-iphone-5s/p/itme8ra4f4twtsva?pid=MOBDPPZZPXVDJHSQ"]]
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (19.7ms)[0m  INSERT INTO "shortened_urls" ("owner_id", "owner_type", "url", "unique_key", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["owner_id", 2], ["owner_type", "User"], ["url", "http://www.flipkart.com/apple-iphone-5s/p/itme8ra4f4twtsva?pid=MOBDPPZZPXVDJHSQ"], ["unique_key", "sdokvi"], ["created_at", "2016-01-02 10:46:20.113051"], ["updated_at", "2016-01-02 10:46:20.113051"]]
+  [1m[36m (3.5ms)[0m  [1mCOMMIT[0m
+Completed 500 Internal Server Error in 360ms (ActiveRecord: 69.5ms)
+
+ActiveRecord::UnknownAttributeError (unknown attribute 'weight' for Product.):
+  app/controllers/orders_controller.rb:12:in `new'
+
+
+  Rendered /home/rony36/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (17.4ms)
+  Rendered /home/rony36/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (9.7ms)
+  Rendered /home/rony36/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (7.8ms)
+  Rendered /home/rony36/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (108.7ms)
+
+
+Started GET "/orders/new?utf8=%E2%9C%93&order%5Burl%5D=http%3A%2F%2Fwww.flipkart.com%2Fapple-iphone-5s%2Fp%2Fitme8ra4f4twtsva%3Fpid%3DMOBDPPZZPXVDJHSQ&commit=Submit" for 127.0.0.1 at 2016-01-02 16:46:55 +0600
+Processing by OrdersController#new as HTML
+  Parameters: {"utf8"=>"✓", "order"=>{"url"=>"http://www.flipkart.com/apple-iphone-5s/p/itme8ra4f4twtsva?pid=MOBDPPZZPXVDJHSQ"}, "commit"=>"Submit"}
+  [1m[35mUser Load (1.6ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+  [1m[36mShortener::ShortenedUrl Load (0.4ms)[0m  [1mSELECT  "shortened_urls".* FROM "shortened_urls" WHERE "shortened_urls"."owner_id" = $1 AND "shortened_urls"."owner_type" = $2 AND "shortened_urls"."url" = $3  ORDER BY "shortened_urls"."id" ASC LIMIT 1[0m  [["owner_id", 2], ["owner_type", "User"], ["url", "http://www.flipkart.com/apple-iphone-5s/p/itme8ra4f4twtsva?pid=MOBDPPZZPXVDJHSQ"]]
+Completed 500 Internal Server Error in 349ms (ActiveRecord: 58.2ms)
+
+ActiveRecord::UnknownAttributeError (unknown attribute 'img_url' for Product.):
+  app/controllers/orders_controller.rb:12:in `new'
+
+
+  Rendered /home/rony36/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (18.3ms)
+  Rendered /home/rony36/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (4.3ms)
+  Rendered /home/rony36/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.2ms)
+  Rendered /home/rony36/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (53.3ms)
+
+
+Started GET "/orders/new?utf8=%E2%9C%93&order%5Burl%5D=http%3A%2F%2Fwww.flipkart.com%2Fapple-iphone-5s%2Fp%2Fitme8ra4f4twtsva%3Fpid%3DMOBDPPZZPXVDJHSQ&commit=Submit" for 127.0.0.1 at 2016-01-02 16:50:02 +0600
+Processing by OrdersController#new as HTML
+  Parameters: {"utf8"=>"✓", "order"=>{"url"=>"http://www.flipkart.com/apple-iphone-5s/p/itme8ra4f4twtsva?pid=MOBDPPZZPXVDJHSQ"}, "commit"=>"Submit"}
+  [1m[35mUser Load (13.7ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+  [1m[36mShortener::ShortenedUrl Load (4.3ms)[0m  [1mSELECT  "shortened_urls".* FROM "shortened_urls" WHERE "shortened_urls"."owner_id" = $1 AND "shortened_urls"."owner_type" = $2 AND "shortened_urls"."url" = $3  ORDER BY "shortened_urls"."id" ASC LIMIT 1[0m  [["owner_id", 2], ["owner_type", "User"], ["url", "http://www.flipkart.com/apple-iphone-5s/p/itme8ra4f4twtsva?pid=MOBDPPZZPXVDJHSQ"]]
+Completed 500 Internal Server Error in 536ms (ActiveRecord: 93.8ms)
+
+ActiveRecord::UnknownAttributeError (unknown attribute 'seller_name' for Product.):
+  app/controllers/orders_controller.rb:12:in `new'
+
+
+  Rendered /home/rony36/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (24.0ms)
+  Rendered /home/rony36/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (5.4ms)
+  Rendered /home/rony36/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.1ms)
+  Rendered /home/rony36/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (76.7ms)
+
+
+Started GET "/orders/new?utf8=%E2%9C%93&order%5Burl%5D=http%3A%2F%2Fwww.flipkart.com%2Fapple-iphone-5s%2Fp%2Fitme8ra4f4twtsva%3Fpid%3DMOBDPPZZPXVDJHSQ&commit=Submit" for 127.0.0.1 at 2016-01-02 16:50:23 +0600
+Processing by OrdersController#new as HTML
+  Parameters: {"utf8"=>"✓", "order"=>{"url"=>"http://www.flipkart.com/apple-iphone-5s/p/itme8ra4f4twtsva?pid=MOBDPPZZPXVDJHSQ"}, "commit"=>"Submit"}
+  [1m[35mUser Load (1.5ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+  [1m[36mShortener::ShortenedUrl Load (6.0ms)[0m  [1mSELECT  "shortened_urls".* FROM "shortened_urls" WHERE "shortened_urls"."owner_id" = $1 AND "shortened_urls"."owner_type" = $2 AND "shortened_urls"."url" = $3  ORDER BY "shortened_urls"."id" ASC LIMIT 1[0m  [["owner_id", 2], ["owner_type", "User"], ["url", "http://www.flipkart.com/apple-iphone-5s/p/itme8ra4f4twtsva?pid=MOBDPPZZPXVDJHSQ"]]
+  [1m[35m (5.6ms)[0m  BEGIN
+  [1m[36mSQL (47.4ms)[0m  [1mINSERT INTO "products" ("name", "base_price", "url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "crawl_data"], ["base_price", 12000.0], ["url", "http://www.flipkart.com/apple-iphone-5s/p/itme8ra4f4twtsva?pid=MOBDPPZZPXVDJHSQ"], ["created_at", "2016-01-02 10:50:23.668810"], ["updated_at", "2016-01-02 10:50:23.668810"]]
+  [1m[35m (7.7ms)[0m  COMMIT
+  Rendered orders/new.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 753ms (Views: 467.8ms | ActiveRecord: 96.6ms)
+
+
+Started GET "/assets/application.self-237b6358625091a4acc52fe417dac934b33a9de7b48f8938751a9aff554d8ba3.css?body=1" for 127.0.0.1 at 2016-01-02 16:50:24 +0600
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for 127.0.0.1 at 2016-01-02 16:50:24 +0600
+
+
+Started GET "/assets/bootstrap/affix.self-3555752f8a930795ee9e56751a52e6871104ae85d01b3ab8363da3802a5ecc78.js?body=1" for 127.0.0.1 at 2016-01-02 16:50:24 +0600
+
+
+Started GET "/assets/bootstrap/alert.self-d8b7bd612b3dcfdefb7b5539b9d5848d66ccbd3e7af8bb8d48bfb3288aaa7be8.js?body=1" for 127.0.0.1 at 2016-01-02 16:50:24 +0600
+
+
+Started GET "/assets/bootstrap/collapse.self-056c40532d9f0f126ec17e839f60c942f573fbd61a086e7f156306e3fc5e8c1f.js?body=1" for 127.0.0.1 at 2016-01-02 16:50:24 +0600
+
+
+Started GET "/assets/bootstrap/button.self-e74d33ba39500940a78d6fa4d2d64f6ca7fd86d60a2149641f7fde7ba711d8a1.js?body=1" for 127.0.0.1 at 2016-01-02 16:50:24 +0600
+
+
+Started GET "/assets/bootstrap/carousel.self-35d204878d906298e55bc24553e11fd89b980fc4ffe5792fe36af8c0da289c54.js?body=1" for 127.0.0.1 at 2016-01-02 16:50:24 +0600
+
+
+Started GET "/assets/bootstrap/dropdown.self-e56c2ffee4618411d43ecf15c89273f6223847ad756e1cd17545d04afa732ed4.js?body=1" for 127.0.0.1 at 2016-01-02 16:50:24 +0600
+
+
+Started GET "/assets/bootstrap/modal.self-62463080dba6b9d024ff0a3192da0e76eacbc683194f3395047c6f5cfa0acb59.js?body=1" for 127.0.0.1 at 2016-01-02 16:50:24 +0600
+
+
+Started GET "/assets/bootstrap/scrollspy.self-52afd90e8ba97d9f08617a13986e8869d6c4a45751c0bff59a6f91241e722aca.js?body=1" for 127.0.0.1 at 2016-01-02 16:50:24 +0600
+
+
+Started GET "/assets/bootstrap/tab.self-dad0d5c377f9fae26394484535ebb23ccf68afae084f896af6ea4cdf8c9f6ae0.js?body=1" for 127.0.0.1 at 2016-01-02 16:50:24 +0600
+
+
+Started GET "/assets/bootstrap/transition.self-3b268d4cd8c79e46ded7392885f72f64ffb5b0d49948a12b8cf9779f6163e13a.js?body=1" for 127.0.0.1 at 2016-01-02 16:50:24 +0600
+
+
+Started GET "/assets/bootstrap/tooltip.self-facdc69246a072acb927ded77ff655f7c27a518b9357fddd45d119fbc8a0ab9f.js?body=1" for 127.0.0.1 at 2016-01-02 16:50:24 +0600
+
+
+Started GET "/assets/bootstrap/popover.self-210cff1fb4b72b71a29b5122180cb5937c8145cd13a934dc838280f1d9607a3e.js?body=1" for 127.0.0.1 at 2016-01-02 16:50:24 +0600
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for 127.0.0.1 at 2016-01-02 16:50:24 +0600
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for 127.0.0.1 at 2016-01-02 16:50:24 +0600
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for 127.0.0.1 at 2016-01-02 16:50:24 +0600
+
+
+Started GET "/assets/dashboard.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-01-02 16:50:24 +0600
+
+
+Started GET "/assets/home.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-01-02 16:50:24 +0600
+
+
+Started GET "/assets/orders.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-01-02 16:50:24 +0600
+
+
+Started GET "/assets/application.self-f8806224e027f3e3f0138ea9ce99319e298dfdb323304d1f1be6eae8e8c74724.js?body=1" for 127.0.0.1 at 2016-01-02 16:50:24 +0600
+
+
+Started GET "/orders/new?utf8=%E2%9C%93&order%5Burl%5D=http%3A%2F%2Fwww.flipkart.com%2Fapple-iphone-5s%2Fp%2Fitme8ra4f4twtsva%3Fpid%3DMOBDPPZZPXVDJHSQ&commit=Submit" for 127.0.0.1 at 2016-01-02 16:51:20 +0600
+Processing by OrdersController#new as HTML
+  Parameters: {"utf8"=>"✓", "order"=>{"url"=>"http://www.flipkart.com/apple-iphone-5s/p/itme8ra4f4twtsva?pid=MOBDPPZZPXVDJHSQ"}, "commit"=>"Submit"}
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+  [1m[35mShortener::ShortenedUrl Load (8.1ms)[0m  SELECT  "shortened_urls".* FROM "shortened_urls" WHERE "shortened_urls"."owner_id" = $1 AND "shortened_urls"."owner_type" = $2 AND "shortened_urls"."url" = $3  ORDER BY "shortened_urls"."id" ASC LIMIT 1  [["owner_id", 2], ["owner_type", "User"], ["url", "http://www.flipkart.com/apple-iphone-5s/p/itme8ra4f4twtsva?pid=MOBDPPZZPXVDJHSQ"]]
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "products" ("name", "base_price", "url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["name", "crawl_data"], ["base_price", 12000.0], ["url", "http://www.flipkart.com/apple-iphone-5s/p/itme8ra4f4twtsva?pid=MOBDPPZZPXVDJHSQ"], ["created_at", "2016-01-02 10:51:20.959864"], ["updated_at", "2016-01-02 10:51:20.959864"]]
+  [1m[36m (0.6ms)[0m  [1mCOMMIT[0m
+  Rendered orders/_form.html.erb (47.2ms)
+  Rendered orders/new.html.erb within layouts/application (99.4ms)
+Completed 500 Internal Server Error in 151ms (ActiveRecord: 10.0ms)
+
+ActionView::Template::Error (undefined method `input' for #<ActionView::Helpers::FormBuilder:0xb3093bd0>):
+    3:       <%= f.label :total_price %>
+    4:     </div>
+    5:     <div class="col-sm-8">
+    6:       <%= f.input :total_price, value: @product.total_price, readonly: true, class: 'form-control' %>
+    7:     </div>
+    8: 
+    9:     <div class="col-sm-12">
+  app/views/orders/_form.html.erb:6:in `block in _app_views_orders__form_html_erb__37252800__645441098'
+  app/views/orders/_form.html.erb:1:in `_app_views_orders__form_html_erb__37252800__645441098'
+  app/views/orders/new.html.erb:1:in `_app_views_orders_new_html_erb__364392263__645591078'
+
+
+  Rendered /home/rony36/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (19.3ms)
+  Rendered /home/rony36/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (16.0ms)
+  Rendered /home/rony36/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (2.6ms)
+  Rendered /home/rony36/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.5/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (90.7ms)
+
+
+Started GET "/orders/new?utf8=%E2%9C%93&order%5Burl%5D=http%3A%2F%2Fwww.flipkart.com%2Fapple-iphone-5s%2Fp%2Fitme8ra4f4twtsva%3Fpid%3DMOBDPPZZPXVDJHSQ&commit=Submit" for 127.0.0.1 at 2016-01-02 16:52:24 +0600
+Processing by OrdersController#new as HTML
+  Parameters: {"utf8"=>"✓", "order"=>{"url"=>"http://www.flipkart.com/apple-iphone-5s/p/itme8ra4f4twtsva?pid=MOBDPPZZPXVDJHSQ"}, "commit"=>"Submit"}
+  [1m[35mUser Load (6.8ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+  [1m[36mShortener::ShortenedUrl Load (0.6ms)[0m  [1mSELECT  "shortened_urls".* FROM "shortened_urls" WHERE "shortened_urls"."owner_id" = $1 AND "shortened_urls"."owner_type" = $2 AND "shortened_urls"."url" = $3  ORDER BY "shortened_urls"."id" ASC LIMIT 1[0m  [["owner_id", 2], ["owner_type", "User"], ["url", "http://www.flipkart.com/apple-iphone-5s/p/itme8ra4f4twtsva?pid=MOBDPPZZPXVDJHSQ"]]
+  [1m[35m (9.9ms)[0m  BEGIN
+  [1m[36mSQL (6.2ms)[0m  [1mINSERT INTO "products" ("name", "base_price", "url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "crawl_data"], ["base_price", 12000.0], ["url", "http://www.flipkart.com/apple-iphone-5s/p/itme8ra4f4twtsva?pid=MOBDPPZZPXVDJHSQ"], ["created_at", "2016-01-02 10:52:24.755510"], ["updated_at", "2016-01-02 10:52:24.755510"]]
+  [1m[35m (7.7ms)[0m  COMMIT
+  Rendered orders/_form.html.erb (4.1ms)
+  Rendered orders/new.html.erb within layouts/application (5.1ms)
+Completed 200 OK in 552ms (Views: 490.9ms | ActiveRecord: 31.2ms)
+
+
+Started GET "/assets/application.self-237b6358625091a4acc52fe417dac934b33a9de7b48f8938751a9aff554d8ba3.css?body=1" for 127.0.0.1 at 2016-01-02 16:52:25 +0600
+
+
+Started GET "/assets/bootstrap/collapse.self-056c40532d9f0f126ec17e839f60c942f573fbd61a086e7f156306e3fc5e8c1f.js?body=1" for 127.0.0.1 at 2016-01-02 16:52:25 +0600
+
+
+Started GET "/assets/bootstrap/affix.self-3555752f8a930795ee9e56751a52e6871104ae85d01b3ab8363da3802a5ecc78.js?body=1" for 127.0.0.1 at 2016-01-02 16:52:25 +0600
+
+
+Started GET "/assets/bootstrap/button.self-e74d33ba39500940a78d6fa4d2d64f6ca7fd86d60a2149641f7fde7ba711d8a1.js?body=1" for 127.0.0.1 at 2016-01-02 16:52:25 +0600
+
+
+Started GET "/assets/bootstrap/carousel.self-35d204878d906298e55bc24553e11fd89b980fc4ffe5792fe36af8c0da289c54.js?body=1" for 127.0.0.1 at 2016-01-02 16:52:25 +0600
+
+
+Started GET "/assets/bootstrap/alert.self-d8b7bd612b3dcfdefb7b5539b9d5848d66ccbd3e7af8bb8d48bfb3288aaa7be8.js?body=1" for 127.0.0.1 at 2016-01-02 16:52:25 +0600
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for 127.0.0.1 at 2016-01-02 16:52:25 +0600
+
+
+Started GET "/assets/bootstrap/dropdown.self-e56c2ffee4618411d43ecf15c89273f6223847ad756e1cd17545d04afa732ed4.js?body=1" for 127.0.0.1 at 2016-01-02 16:52:25 +0600
+
+
+Started GET "/assets/bootstrap/modal.self-62463080dba6b9d024ff0a3192da0e76eacbc683194f3395047c6f5cfa0acb59.js?body=1" for 127.0.0.1 at 2016-01-02 16:52:26 +0600
+
+
+Started GET "/assets/bootstrap/scrollspy.self-52afd90e8ba97d9f08617a13986e8869d6c4a45751c0bff59a6f91241e722aca.js?body=1" for 127.0.0.1 at 2016-01-02 16:52:26 +0600
+
+
+Started GET "/assets/bootstrap/tab.self-dad0d5c377f9fae26394484535ebb23ccf68afae084f896af6ea4cdf8c9f6ae0.js?body=1" for 127.0.0.1 at 2016-01-02 16:52:26 +0600
+
+
+Started GET "/assets/bootstrap/transition.self-3b268d4cd8c79e46ded7392885f72f64ffb5b0d49948a12b8cf9779f6163e13a.js?body=1" for 127.0.0.1 at 2016-01-02 16:52:26 +0600
+
+
+Started GET "/assets/bootstrap/tooltip.self-facdc69246a072acb927ded77ff655f7c27a518b9357fddd45d119fbc8a0ab9f.js?body=1" for 127.0.0.1 at 2016-01-02 16:52:26 +0600
+
+
+Started GET "/assets/bootstrap/popover.self-210cff1fb4b72b71a29b5122180cb5937c8145cd13a934dc838280f1d9607a3e.js?body=1" for 127.0.0.1 at 2016-01-02 16:52:26 +0600
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for 127.0.0.1 at 2016-01-02 16:52:26 +0600
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for 127.0.0.1 at 2016-01-02 16:52:26 +0600
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for 127.0.0.1 at 2016-01-02 16:52:26 +0600
+
+
+Started GET "/assets/dashboard.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-01-02 16:52:26 +0600
+
+
+Started GET "/assets/home.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-01-02 16:52:26 +0600
+
+
+Started GET "/assets/orders.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-01-02 16:52:26 +0600
+
+
+Started GET "/assets/application.self-f8806224e027f3e3f0138ea9ce99319e298dfdb323304d1f1be6eae8e8c74724.js?body=1" for 127.0.0.1 at 2016-01-02 16:52:26 +0600
+
+
+Started GET "/orders/new?utf8=%E2%9C%93&order%5Burl%5D=http%3A%2F%2Fwww.flipkart.com%2Fapple-iphone-5s%2Fp%2Fitme8ra4f4twtsva%3Fpid%3DMOBDPPZZPXVDJHSQ&commit=Submit" for 127.0.0.1 at 2016-01-02 16:53:53 +0600
+Processing by OrdersController#new as HTML
+  Parameters: {"utf8"=>"✓", "order"=>{"url"=>"http://www.flipkart.com/apple-iphone-5s/p/itme8ra4f4twtsva?pid=MOBDPPZZPXVDJHSQ"}, "commit"=>"Submit"}
+  [1m[36mUser Load (0.7ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+  [1m[35mShortener::ShortenedUrl Load (3.4ms)[0m  SELECT  "shortened_urls".* FROM "shortened_urls" WHERE "shortened_urls"."owner_id" = $1 AND "shortened_urls"."owner_type" = $2 AND "shortened_urls"."url" = $3  ORDER BY "shortened_urls"."id" ASC LIMIT 1  [["owner_id", 2], ["owner_type", "User"], ["url", "http://www.flipkart.com/apple-iphone-5s/p/itme8ra4f4twtsva?pid=MOBDPPZZPXVDJHSQ"]]
+  [1m[36m (11.8ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.9ms)[0m  INSERT INTO "products" ("name", "base_price", "url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["name", "crawl_data"], ["base_price", 12000.0], ["url", "http://www.flipkart.com/apple-iphone-5s/p/itme8ra4f4twtsva?pid=MOBDPPZZPXVDJHSQ"], ["created_at", "2016-01-02 10:54:57.262817"], ["updated_at", "2016-01-02 10:54:57.262817"]]
+  [1m[36m (5.9ms)[0m  [1mCOMMIT[0m
+  Rendered orders/_form.html.erb (106.3ms)
+  Rendered orders/new.html.erb within layouts/application (142.5ms)
+Completed 200 OK in 65990ms (Views: 1729.1ms | ActiveRecord: 22.6ms)
+
+
+Started GET "/assets/application.self-237b6358625091a4acc52fe417dac934b33a9de7b48f8938751a9aff554d8ba3.css?body=1" for 127.0.0.1 at 2016-01-02 16:54:59 +0600
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for 127.0.0.1 at 2016-01-02 16:54:59 +0600
+
+
+Started GET "/assets/bootstrap/affix.self-3555752f8a930795ee9e56751a52e6871104ae85d01b3ab8363da3802a5ecc78.js?body=1" for 127.0.0.1 at 2016-01-02 16:55:01 +0600
+
+
+Started GET "/assets/bootstrap/alert.self-d8b7bd612b3dcfdefb7b5539b9d5848d66ccbd3e7af8bb8d48bfb3288aaa7be8.js?body=1" for 127.0.0.1 at 2016-01-02 16:55:01 +0600
+
+
+Started GET "/assets/bootstrap/carousel.self-35d204878d906298e55bc24553e11fd89b980fc4ffe5792fe36af8c0da289c54.js?body=1" for 127.0.0.1 at 2016-01-02 16:55:01 +0600
+
+
+Started GET "/assets/bootstrap/button.self-e74d33ba39500940a78d6fa4d2d64f6ca7fd86d60a2149641f7fde7ba711d8a1.js?body=1" for 127.0.0.1 at 2016-01-02 16:55:01 +0600
+
+
+Started GET "/assets/bootstrap/collapse.self-056c40532d9f0f126ec17e839f60c942f573fbd61a086e7f156306e3fc5e8c1f.js?body=1" for 127.0.0.1 at 2016-01-02 16:55:01 +0600
+
+
+Started GET "/assets/bootstrap/dropdown.self-e56c2ffee4618411d43ecf15c89273f6223847ad756e1cd17545d04afa732ed4.js?body=1" for 127.0.0.1 at 2016-01-02 16:55:01 +0600
+
+
+Started GET "/assets/bootstrap/modal.self-62463080dba6b9d024ff0a3192da0e76eacbc683194f3395047c6f5cfa0acb59.js?body=1" for 127.0.0.1 at 2016-01-02 16:55:01 +0600
+
+
+Started GET "/assets/bootstrap/scrollspy.self-52afd90e8ba97d9f08617a13986e8869d6c4a45751c0bff59a6f91241e722aca.js?body=1" for 127.0.0.1 at 2016-01-02 16:55:01 +0600
+
+
+Started GET "/assets/bootstrap/tab.self-dad0d5c377f9fae26394484535ebb23ccf68afae084f896af6ea4cdf8c9f6ae0.js?body=1" for 127.0.0.1 at 2016-01-02 16:55:01 +0600
+
+
+Started GET "/assets/bootstrap/transition.self-3b268d4cd8c79e46ded7392885f72f64ffb5b0d49948a12b8cf9779f6163e13a.js?body=1" for 127.0.0.1 at 2016-01-02 16:55:02 +0600
+
+
+Started GET "/assets/bootstrap/tooltip.self-facdc69246a072acb927ded77ff655f7c27a518b9357fddd45d119fbc8a0ab9f.js?body=1" for 127.0.0.1 at 2016-01-02 16:55:02 +0600
+
+
+Started GET "/assets/bootstrap/popover.self-210cff1fb4b72b71a29b5122180cb5937c8145cd13a934dc838280f1d9607a3e.js?body=1" for 127.0.0.1 at 2016-01-02 16:55:02 +0600
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for 127.0.0.1 at 2016-01-02 16:55:02 +0600
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for 127.0.0.1 at 2016-01-02 16:55:02 +0600
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for 127.0.0.1 at 2016-01-02 16:55:02 +0600
+
+
+Started GET "/assets/dashboard.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-01-02 16:55:02 +0600
+
+
+Started GET "/assets/home.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-01-02 16:55:02 +0600
+
+
+Started GET "/assets/orders.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-01-02 16:55:02 +0600
+
+
+Started GET "/assets/application.self-f8806224e027f3e3f0138ea9ce99319e298dfdb323304d1f1be6eae8e8c74724.js?body=1" for 127.0.0.1 at 2016-01-02 16:55:02 +0600
+
+
+Started GET "/orders/new?utf8=%E2%9C%93&order%5Burl%5D=http%3A%2F%2Fwww.flipkart.com%2Fapple-iphone-5s%2Fp%2Fitme8ra4f4twtsva%3Fpid%3DMOBDPPZZPXVDJHSQ&commit=Submit" for 127.0.0.1 at 2016-01-02 16:55:08 +0600
+Processing by OrdersController#new as HTML
+  Parameters: {"utf8"=>"✓", "order"=>{"url"=>"http://www.flipkart.com/apple-iphone-5s/p/itme8ra4f4twtsva?pid=MOBDPPZZPXVDJHSQ"}, "commit"=>"Submit"}
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+  [1m[36mShortener::ShortenedUrl Load (0.3ms)[0m  [1mSELECT  "shortened_urls".* FROM "shortened_urls" WHERE "shortened_urls"."owner_id" = $1 AND "shortened_urls"."owner_type" = $2 AND "shortened_urls"."url" = $3  ORDER BY "shortened_urls"."id" ASC LIMIT 1[0m  [["owner_id", 2], ["owner_type", "User"], ["url", "http://www.flipkart.com/apple-iphone-5s/p/itme8ra4f4twtsva?pid=MOBDPPZZPXVDJHSQ"]]
+  [1m[35m (17.2ms)[0m  BEGIN
+  [1m[36mSQL (3.6ms)[0m  [1mINSERT INTO "products" ("name", "base_price", "url", "total_price", "shorten_url", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["name", "crawl_data"], ["base_price", 12000.0], ["url", "http://www.flipkart.com/apple-iphone-5s/p/itme8ra4f4twtsva?pid=MOBDPPZZPXVDJHSQ"], ["total_price", 16860.0], ["shorten_url", "http://localhost:3000/5b1npb"], ["created_at", "2016-01-02 10:55:15.222876"], ["updated_at", "2016-01-02 10:55:15.222876"]]
+  [1m[35m (33.0ms)[0m  COMMIT
+  Rendered orders/_form.html.erb (15.7ms)
+  Rendered orders/new.html.erb within layouts/application (16.4ms)
+Completed 200 OK in 6926ms (Views: 631.6ms | ActiveRecord: 81.8ms)
+
+
+Started GET "/assets/application.self-237b6358625091a4acc52fe417dac934b33a9de7b48f8938751a9aff554d8ba3.css?body=1" for 127.0.0.1 at 2016-01-02 16:55:15 +0600
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for 127.0.0.1 at 2016-01-02 16:55:16 +0600
+
+
+Started GET "/assets/bootstrap/affix.self-3555752f8a930795ee9e56751a52e6871104ae85d01b3ab8363da3802a5ecc78.js?body=1" for 127.0.0.1 at 2016-01-02 16:55:16 +0600
+
+
+Started GET "/assets/bootstrap/button.self-e74d33ba39500940a78d6fa4d2d64f6ca7fd86d60a2149641f7fde7ba711d8a1.js?body=1" for 127.0.0.1 at 2016-01-02 16:55:16 +0600
+
+
+Started GET "/assets/bootstrap/carousel.self-35d204878d906298e55bc24553e11fd89b980fc4ffe5792fe36af8c0da289c54.js?body=1" for 127.0.0.1 at 2016-01-02 16:55:16 +0600
+
+
+Started GET "/assets/bootstrap/alert.self-d8b7bd612b3dcfdefb7b5539b9d5848d66ccbd3e7af8bb8d48bfb3288aaa7be8.js?body=1" for 127.0.0.1 at 2016-01-02 16:55:16 +0600
+
+
+Started GET "/assets/bootstrap/collapse.self-056c40532d9f0f126ec17e839f60c942f573fbd61a086e7f156306e3fc5e8c1f.js?body=1" for 127.0.0.1 at 2016-01-02 16:55:16 +0600
+
+
+Started GET "/assets/bootstrap/dropdown.self-e56c2ffee4618411d43ecf15c89273f6223847ad756e1cd17545d04afa732ed4.js?body=1" for 127.0.0.1 at 2016-01-02 16:55:16 +0600
+
+
+Started GET "/assets/bootstrap/modal.self-62463080dba6b9d024ff0a3192da0e76eacbc683194f3395047c6f5cfa0acb59.js?body=1" for 127.0.0.1 at 2016-01-02 16:55:16 +0600
+
+
+Started GET "/assets/bootstrap/scrollspy.self-52afd90e8ba97d9f08617a13986e8869d6c4a45751c0bff59a6f91241e722aca.js?body=1" for 127.0.0.1 at 2016-01-02 16:55:16 +0600
+
+
+Started GET "/assets/bootstrap/tab.self-dad0d5c377f9fae26394484535ebb23ccf68afae084f896af6ea4cdf8c9f6ae0.js?body=1" for 127.0.0.1 at 2016-01-02 16:55:16 +0600
+
+
+Started GET "/assets/bootstrap/transition.self-3b268d4cd8c79e46ded7392885f72f64ffb5b0d49948a12b8cf9779f6163e13a.js?body=1" for 127.0.0.1 at 2016-01-02 16:55:16 +0600
+
+
+Started GET "/assets/bootstrap/tooltip.self-facdc69246a072acb927ded77ff655f7c27a518b9357fddd45d119fbc8a0ab9f.js?body=1" for 127.0.0.1 at 2016-01-02 16:55:16 +0600
+
+
+Started GET "/assets/bootstrap/popover.self-210cff1fb4b72b71a29b5122180cb5937c8145cd13a934dc838280f1d9607a3e.js?body=1" for 127.0.0.1 at 2016-01-02 16:55:16 +0600
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for 127.0.0.1 at 2016-01-02 16:55:16 +0600
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for 127.0.0.1 at 2016-01-02 16:55:16 +0600
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for 127.0.0.1 at 2016-01-02 16:55:16 +0600
+
+
+Started GET "/assets/dashboard.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-01-02 16:55:16 +0600
+
+
+Started GET "/assets/home.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-01-02 16:55:16 +0600
+
+
+Started GET "/assets/orders.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-01-02 16:55:16 +0600
+
+
+Started GET "/assets/application.self-f8806224e027f3e3f0138ea9ce99319e298dfdb323304d1f1be6eae8e8c74724.js?body=1" for 127.0.0.1 at 2016-01-02 16:55:16 +0600
+
+
+Started GET "/" for 127.0.0.1 at 2016-01-02 16:55:48 +0600
+Processing by HomeController#index as HTML
+Nothing to Do here!
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+  Rendered shared/_order_initiation.html.erb (0.5ms)
+  Rendered home/index.html.erb within layouts/application (3.2ms)
+Completed 200 OK in 55ms (Views: 53.4ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/dashboard" for 127.0.0.1 at 2016-01-02 16:55:51 +0600
+Processing by DashboardController#index as HTML
+  [1m[35mUser Load (3.0ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+  [1m[36mShortener::ShortenedUrl Load (0.3ms)[0m  [1mSELECT "shortened_urls".* FROM "shortened_urls" WHERE "shortened_urls"."owner_id" = $1 AND "shortened_urls"."owner_type" = $2[0m  [["owner_id", 2], ["owner_type", "User"]]
+  Rendered dashboard/index.html.erb within layouts/application (125.7ms)
+Completed 200 OK in 203ms (Views: 197.7ms | ActiveRecord: 3.3ms)
+
+
+Started GET "/59/delete" for 127.0.0.1 at 2016-01-02 16:55:57 +0600
+Processing by DashboardController#destroy_shortened as JS
+  Parameters: {"url_id"=>"59"}
+  [1m[35mUser Load (0.6ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+  [1m[36mShortener::ShortenedUrl Load (0.3ms)[0m  [1mSELECT  "shortened_urls".* FROM "shortened_urls" WHERE "shortened_urls"."id" = $1 LIMIT 1[0m  [["id", 59]]
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.5ms)[0m  [1mDELETE FROM "shortened_urls" WHERE "shortened_urls"."id" = $1[0m  [["id", 59]]
+  [1m[35m (0.7ms)[0m  COMMIT
+  Rendered dashboard/destroy_shortened.js.erb (0.1ms)
+Completed 200 OK in 13ms (Views: 6.6ms | ActiveRecord: 2.1ms)
+
+
+Started GET "/58/delete" for 127.0.0.1 at 2016-01-02 16:55:58 +0600
+Processing by DashboardController#destroy_shortened as JS
+  Parameters: {"url_id"=>"58"}
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 2]]
+  [1m[35mShortener::ShortenedUrl Load (0.3ms)[0m  SELECT  "shortened_urls".* FROM "shortened_urls" WHERE "shortened_urls"."id" = $1 LIMIT 1  [["id", 58]]
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  DELETE FROM "shortened_urls" WHERE "shortened_urls"."id" = $1  [["id", 58]]
+  [1m[36m (1.2ms)[0m  [1mCOMMIT[0m
+  Rendered dashboard/destroy_shortened.js.erb (0.0ms)
+Completed 200 OK in 12ms (Views: 6.7ms | ActiveRecord: 2.1ms)
+
+
+Started GET "/57/delete" for 127.0.0.1 at 2016-01-02 16:56:00 +0600
+Processing by DashboardController#destroy_shortened as JS
+  Parameters: {"url_id"=>"57"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+  [1m[36mShortener::ShortenedUrl Load (0.3ms)[0m  [1mSELECT  "shortened_urls".* FROM "shortened_urls" WHERE "shortened_urls"."id" = $1 LIMIT 1[0m  [["id", 57]]
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mDELETE FROM "shortened_urls" WHERE "shortened_urls"."id" = $1[0m  [["id", 57]]
+  [1m[35m (0.7ms)[0m  COMMIT
+  Rendered dashboard/destroy_shortened.js.erb (0.0ms)
+Completed 200 OK in 12ms (Views: 6.6ms | ActiveRecord: 1.8ms)

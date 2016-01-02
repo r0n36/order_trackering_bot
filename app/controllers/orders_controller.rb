@@ -4,10 +4,12 @@ class OrdersController < ApplicationController
   def new
     order = Order.new
     long_url = params[:order][:url]
-    short_url = order.generate_unique(long_url, current_user)
+    unique_key = order.generate_unique(long_url, current_user)
     obj = Crawl::Flipkart::ProductData.new(long_url)
-    data = obj.crawl_data
-    puts 'hee'
+    product_attributes = obj.product_data
+    total_price = order.calculate_total_price(product_attributes[:base_price], product_attributes[:weight], false)
+    product_attributes.merge!(total_price: total_price, shorten_url: "#{root_url}#{unique_key}")
+    @product = Product.create product_attributes.except(:weight, :img_url, :seller_name)
   end
 
   def create

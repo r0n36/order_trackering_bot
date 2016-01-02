@@ -1,0 +1,33 @@
+<%= form_for :orders, class: 'form-inline' do |f| %>
+    <div class="col-sm-12">
+      <%= f.label :total_price %>
+    </div>
+    <div class="col-sm-8">
+      <%= f.text_field :total_price, value: @product.total_price, readonly: true, class: 'form-control' %>
+    </div>
+
+    <div class="col-sm-12">
+      <%= f.label :shipping_address, 'Your Address here: ' %>
+    </div>
+    <div class="col-sm-8">
+      <%= f.text_area :shipping_address, class: 'form-control' %>
+    </div>
+
+    <div class="col-sm-12">
+      <%= f.label :confirmation_phone_number %>
+    </div>
+    <div class="col-sm-8">
+      <%= f.text_field :confirmation_phone_number, class: 'form-control' %>
+    </div>
+
+    <div class="col-sm-12">
+      <%= f.label :comment %>
+    </div>
+    <div class="col-sm-8">
+      <%= f.text_area :comment, class: 'form-control' %>
+    </div>
+
+    <div class="col-sm-4">
+      <%= f.submit 'Confirm', class: 'btn btn-common' %>
+    </div>
+<% end %>
